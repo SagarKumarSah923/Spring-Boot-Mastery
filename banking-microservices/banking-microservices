@@ -1,1 +1,101 @@
-
+banking-microservices/
+├── .github/
+│    └── workflows/
+│         └── ci-cd.yml
+│
+├── api-gateway/                          ← Port 8080
+│    ├── src/main/
+│    │    ├── java/com/banking/gateway/
+│    │    │    ├── ApiGatewayApplication.java
+│    │    │    ├── config/
+│    │    │    │    ├── GatewayConfig.java
+│    │    │    │    └── SecurityConfig.java
+│    │    │    └── filter/
+│    │    │         └── JwtAuthFilter.java
+│    │    └── resources/
+│    │         └── application.yml
+│    ├── Dockerfile
+│    └── pom.xml
+│
+├── eureka-server/                        ← Port 8761
+│    ├── src/main/
+│    │    ├── java/com/banking/eureka/
+│    │    │    └── EurekaServerApplication.java
+│    │    └── resources/
+│    │         └── application.yml
+│    ├── Dockerfile
+│    └── pom.xml
+│
+├── account-service/                      ← Port 8081
+│    ├── src/main/
+│    │    ├── java/com/banking/account/
+│    │    │    ├── AccountServiceApplication.java
+│    │    │    ├── controller/
+│    │    │    │    └── AccountController.java
+│    │    │    ├── service/
+│    │    │    │    └── AccountService.java
+│    │    │    ├── repository/
+│    │    │    │    └── AccountRepository.java
+│    │    │    ├── entity/
+│    │    │    │    └── Account.java
+│    │    │    ├── dto/
+│    │    │    │    ├── AccountRequest.java
+│    │    │    │    └── AccountResponse.java
+│    │    │    ├── kafka/
+│    │    │    │    └── AccountEventProducer.java
+│    │    │    └── exception/
+│    │    │         └── AccountNotFoundException.java
+│    │    └── resources/
+│    │         ├── application.yml
+│    │         └── db/migration/
+│    │              └── V1__create_accounts_table.sql
+│    ├── Dockerfile
+│    └── pom.xml
+│
+├── transaction-service/                  ← Port 8082
+│    ├── src/main/
+│    │    ├── java/com/banking/transaction/
+│    │    │    ├── TransactionServiceApplication.java
+│    │    │    ├── controller/
+│    │    │    │    └── TransactionController.java
+│    │    │    ├── service/
+│    │    │    │    └── TransactionService.java
+│    │    │    ├── repository/
+│    │    │    │    └── TransactionRepository.java
+│    │    │    ├── entity/
+│    │    │    │    └── Transaction.java
+│    │    │    ├── dto/
+│    │    │    │    ├── TransactionRequest.java
+│    │    │    │    └── TransactionResponse.java
+│    │    │    ├── kafka/
+│    │    │    │    ├── TransactionEventProducer.java
+│    │    │    │    └── TransactionEventConsumer.java
+│    │    │    ├── client/
+│    │    │    │    └── AccountServiceClient.java
+│    │    │    └── exception/
+│    │    │         └── InsufficientFundsException.java
+│    │    └── resources/
+│    │         ├── application.yml
+│    │         └── db/migration/
+│    │              └── V1__create_transactions_table.sql
+│    ├── Dockerfile
+│    └── pom.xml
+│
+├── notification-service/                 ← Port 8083
+│    ├── src/main/
+│    │    ├── java/com/banking/notification/
+│    │    │    ├── NotificationServiceApplication.java
+│    │    │    ├── service/
+│    │    │    │    └── NotificationService.java
+│    │    │    ├── kafka/
+│    │    │    │    └── NotificationEventConsumer.java
+│    │    │    └── dto/
+│    │    │         └── NotificationEvent.java
+│    │    └── resources/
+│    │         └── application.yml
+│    ├── Dockerfile
+│    └── pom.xml
+│
+├── docker-compose.yml                    ← Starts everything
+├── pom.xml                               ← Parent POM
+└── README.md
